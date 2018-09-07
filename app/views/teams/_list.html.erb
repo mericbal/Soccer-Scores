@@ -1,0 +1,8 @@
+<% @teams.each do |t| %>
+		<% if current_user.favs.include? t.id %>
+			<li> <%= t.name %> --- <i id="green" class="far fa-thumbs-up"></i> </li>
+		<% else %>
+			<li> <%= t.name %> --- <%= link_to 'add to my favs', add_to_fav_team_path(t) %> </li>
+		<% end %>
+	<% end %>
+	

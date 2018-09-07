@@ -1,0 +1,84 @@
+<div class="container-fluid" id="all-games">
+
+	<h2 class="text-center" id="tema"> List of all the games played . </h2>
+	<br>
+
+	<table class="table table-condensed" id="all-games">
+		
+		<thead>
+			<tr>
+				<th> # </th> <th> home </th> <th> </th> <th> away </th> <th> score ? </th>
+			</tr>
+		</thead>
+
+		<tbody>
+		<% @all_games.each.with_index(1) do |g,i| %>
+			
+			<tr>
+				<td> <%= i %></td>
+				<% if User.find(g.home) == current_user  %>
+					<td id="green"> <%= User.find(g.home).username %> </td>
+				<% else %>
+					<td> <%= User.find(g.home).username %> </td>
+				<% end %>
+				<td> vs. </td>
+
+				<% if User.find(g.away) == current_user  %>
+					<td id="green"> <%= User.find(g.away).username %> </td>
+				<% else %>
+					<td> <%= User.find(g.away).username %> </td>
+				<% end %>
+
+				<% if g.winner == current_user.id %>
+					<td id="green"> <%= g.homegoal %> - <%= g.awaygoal %> </td>
+				<% elsif g.loser == current_user.id %>
+					<td id="red"> <%= g.homegoal %> - <%= g.awaygoal %> </td>
+				<% else %>
+					<td id="orange"> <%= g.homegoal %> - <%= g.awaygoal %> </td>
+				<% end %>
+
+			</tr>
+
+		<% end %>
+		</tbody>
+
+	</table>
+
+
+	<br>
+	<h2 class="text-center" id="white">Your games</h2>
+
+	<div id="filter" >
+		
+		<div id="myBtnContainer">
+		  <button class="btn-filter active" onclick="filterSelection('all')"> Show all</button>
+		  <button class="btn-filter" onclick="filterSelection('won')" > Won </button>
+		  <button class="btn-filter" onclick="filterSelection('lost')"> Lost</button>
+		  <button class="btn-filter" onclick="filterSelection('draw')"> Draw</button>
+		  <!-- <button class="btn" onclick="filterSelection('home')"> Home</button> -->
+		  <!-- <button class="btn" onclick="filterSelection('away')"> Away</button> -->
+		</div>
+
+		<div class="filter-container">
+			<% @games_won.each do |g| %>
+			  <div class="filterDiv won" id="bg-green"> 
+			  <i class="fa fa-thumbs-up"></i> 
+			  <%= g.homegoal %> - <%= g.awaygoal %> </div>
+			<% end %>
+
+			<% @games_lost.each do |g| %>
+			  <div class="filterDiv lost" id="bg-red"> 
+			  <i class="fa fa-thumbs-down"></i> 
+			  <%= g.homegoal %> - <%= g.awaygoal %> </div>
+			<% end %>
+
+			<% @games_draw.each do |g| %>
+			  <div class="filterDiv draw" id="bg-orange"> 
+			  <%= g.homegoal %> - <%= g.awaygoal %> </div>
+			<% end %>
+		</div><!-- filter cont -->
+
+	</div><!-- filter -->
+	
+	<%= render 'script2' %>
+</div> <!-- main div -->

@@ -1,0 +1,48 @@
+<div class="container-fluid" id="index-image">
+  <%= render 'jumbotron' %>
+  <%= render 'flash' %>
+  
+  <div class="row text-center">
+
+    <div class="col-sm-6 col-xs-12 opaq">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <h1>Quick Summary</h1>
+        </div>
+        <div class="panel-body">
+          <p><strong id="red"> <%= current_user.games.count %></strong> games played </p>
+          <p><strong id="green"> <%= current_user.wins? %></strong> wins </p>
+          <p><strong id="blue"> <%= current_user.points %></strong> points </p>
+        </div>
+        <div class="panel-footer">
+          <%= link_to 'dashboard', dashboard_path, class: "btn btn-lg button4" %>
+        </div>
+      </div>      
+    </div>     
+    
+    <div class="col-sm-6 col-xs-12 opaq">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <h1>Recently added teams</h1>
+        </div>
+        <div class="panel-body">
+          <% @teams.each do |t| %>
+	          <% if current_user.favs.include? t.id %>
+	          	<p> <i id="green" class="far fa-thumbs-up"></i> <strong id="green"> <%= t.name %></strong> </p>
+	          <% else %>
+	          	<p><strong id="orange"><%= t.name %></strong></p>
+	          <% end %>
+          <% end %>
+        </div>
+        <div class="panel-footer">
+					<%= link_to 'all teams', teams_path, class: "btn btn-lg button4" %>
+        </div>
+      </div>      
+    </div>       
+
+    
+    <!-- row -->
+  </div>
+
+<!-- main div -->
+</div>

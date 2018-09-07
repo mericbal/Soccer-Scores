@@ -1,0 +1,40 @@
+<div style="" class="container-fluid" id="points-table">
+
+	<h2 class="text-center" id="tema" > Points of all players </h2>
+	<br>
+
+<table class="table table-condensed" id="points-table" >
+	
+	<thead>
+		<tr>
+			<th> # </th>
+			<th> player </th> 
+			<th> PTS </th> 
+			<th> PL </th> 
+			<th id="green"> W </th> 
+			<th id="orange"> D </th> 
+			<th id="red"> L </th> 
+			<th> GD </th>
+		</tr>
+	</thead>
+
+	<tbody>
+	<% @users.each.with_index(1) do |u,i| %>
+		<tr>
+			<td> <%= i %> </td>
+			<td> <%= u.username %> </td>
+			<td id="red"> <%= u.points %> </td>
+			<td> <%= u.games.count %> </td>
+			<td> <%= u.wins? %> </td>
+			<td id="orange"> <%= u.draws? %> </td>
+			<td> <%= u.lost? %> </td>
+			<td> <%= u.goals_s - u.goals_a %> </td>
+		</tr>
+	<% end %>
+	</tbody>
+
+</table>
+
+
+<!-- main div -->
+</div>
