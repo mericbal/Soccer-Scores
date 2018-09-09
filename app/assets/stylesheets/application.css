@@ -396,6 +396,7 @@ div#dashboard {
 }
 
 #filter {
+  min-height: 220px;
   padding: 10px;
   border-radius: 20px;
   background-color: white;
